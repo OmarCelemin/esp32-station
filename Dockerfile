@@ -10,6 +10,9 @@ RUN apt-get update && apt-get install -y \
     && a2enmod php8.1 \
     && rm -rf /var/lib/apt/lists/*
 
+# Eliminar página por defecto
+RUN rm -f /var/www/html/index.html
+
 COPY . /var/www/html/
 RUN chmod 644 /var/www/html/*.php
 
