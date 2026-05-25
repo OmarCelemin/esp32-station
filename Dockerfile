@@ -11,9 +11,6 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 COPY . /var/www/html/
-
-RUN rm -f /var/www/html/index.html
-
 RUN chmod 644 /var/www/html/*.php
 
 EXPOSE 80
