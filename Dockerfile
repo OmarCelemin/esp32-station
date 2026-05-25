@@ -1,22 +1,17 @@
-FROM ubuntu:22.04
+<?php
+$host     = getenv("MYSQLHOST");
+$db       = getenv("MYSQLDATABASE");
+$user     = getenv("MYSQLUSER");
+$password = getenv("MYSQLPASSWORD");
+$port     = getenv("MYSQLPORT") ?: 3306;
 
-ENV DEBIAN_FRONTEND=noninteractive
+header("Content-Type: application/json");
 
-RUN apt-get update && apt-get install -y \
-    apache2 \
-    php8.1 \
-    php8.1-mysql \
-    libapache2-mod-php8.1 \
-    && a2enmod php8.1 \
-    && rm -rf /var/lib/apt/lists/*
-
-COPY . /var/www/html/
-
-# Eliminar después del COPY
-RUN rm -f /var/www/html/index.html
-
-RUN chmod 644 /var/www/html/*.php
-
-EXPOSE 80
-
-CMD ["apache2ctl", "-D", "FOREGROUND"]
+// Debug temporal
+echo json_encode([
+    "host" => $host,
+    "db"   => $db,
+    "user" => $user,
+    "port" => $port
+]);
+?>
